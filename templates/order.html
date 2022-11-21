@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy ORDER</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<h1>ORDER</h1>
+
+<h1>Items: </h1>
+{% for item in items %}
+    <p>{{ item.name }}</p>
+{% endfor %}
+
+<h1>Discounts: </h1>
+{% for discount in discounts %}
+    <p>{{ discount.name }}</p>
+{% endfor %}
+
+<h1>Taxes: </h1>
+{% for tax in taxes %}
+    <p>{{ tax.name }}</p>
+{% endfor %}
+
+<p>Total price (without discount and taxes): {{ total_price }}</p>
+<button id="buy-button">Buy</button>
+<script type="text/javascript">
+    const stripe = Stripe('pk_test_51M6CHmEMjhL4Jv85JWSbg8hEg0XQh09npy13Rxn0fUoidPA16bLQePqQwDD8FlM1PSLscnnOK3P3CFLvSND8D7if00FEEzjL74');
+    const buyButton = document.getElementById('buy-button');
+    buyButton.addEventListener('click', function () {
+        // Create a new Checkout Session using the server-side endpoint
+        // Redirect to Stripe Session Checkout
+        fetch('/buy_order/{{ id }}', {method: 'GET'})
+            .then(response => response.json())
+            .then(({session_id}) => stripe.redirectToCheckout({sessionId: session_id}))
+    });
+</script>
+</body>
+</html>
