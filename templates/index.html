@@ -12,18 +12,21 @@
     <label>
         items-ids
         <input type="text" id="items-ids"/>
+        возможные значения {{ items_values }}
     </label>
 </div>
 <div>
     <label>
         discount-id
         <input type="text" id="discount-id"/>
+        возможные значения {{ discounts_values }}
     </label>
 </div>
 <div>
     <label>
         taxes-ids
         <input type="text" id="taxes-ids"/>
+        возможные значения {{ taxes_values }}
     </label>
 </div>
 <div>
@@ -38,8 +41,7 @@
 
         try {
             document.getElementById('a').remove();
-        }
-        catch (e) {
+        } catch (e) {
 
         }
         let a = document.createElement('a');
