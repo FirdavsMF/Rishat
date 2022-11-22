@@ -10,9 +10,9 @@
 
 * Использование `environment variables`
 
-* Просмотр Django Моделей в Django Admin панели - __доступно по адресу `coxalah534.pythonanywhere.com/admin` user: `admin`, pass: `1`__
+* Просмотр Django Моделей в Django Admin панели
 
-* Запуск приложения на удаленном сервере, доступном для тестирования - __запущенно на `coxalah534.pythonanywhere.com`__
+* Запуск приложения на удаленном сервере, доступном для тестирования - `coxalah534.pythonanywhere.com`
 
 * Модель Order, в которой можно объединить несколько Item и сделать платёж в Stripe на содержимое Order c общей стоимостью всех Items
 
