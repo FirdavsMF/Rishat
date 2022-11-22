@@ -94,8 +94,7 @@ def add_discount_to_order(order, discount_id):
     discount = Discount.objects.get(id=discount_id)
     order.discounts.add(discount)
     try:
-        stripe.Coupon.create(currency=discount.currency, duration='once', id=discount_id,
-                             percent_off=discount.percent_off)
+        stripe.Coupon.create(duration='once', id=discount_id, percent_off=discount.percent_off)
     except stripe.error.InvalidRequestError:
         pass
 
