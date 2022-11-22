@@ -11,7 +11,19 @@ REDIRECT_URL = 'https://coxalah534.pythonanywhere.com'
 
 
 def index(request):
-    return render(request, 'index.html')
+    items_values = ''
+    discounts_values = ''
+    taxes_values = ''
+
+    for item in Item.objects.all():
+        items_values += str(item.id) + ','
+    for discount in Discount.objects.all():
+        discounts_values += str(discount.id) + ','
+    for tax in Tax.objects.all():
+        taxes_values += str(tax.id) + ','
+    return render(request, 'index.html', {'items_values': items_values[:-1],
+                                          'discounts_values': discounts_values[:-1],
+                                          'taxes_values': taxes_values[:-1]})
 
 
 def buy_item(request, item_id):
