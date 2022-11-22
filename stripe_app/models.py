@@ -19,11 +19,6 @@ class Item(models.Model):
 
 class Discount(models.Model):
     name = models.CharField(max_length=200)
-    currency = models.CharField(
-        max_length=3,
-        choices=CURRENCIES,
-        default='usd',
-    )
     percent_off = models.FloatField(default=0)
 
 
