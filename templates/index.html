@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <a href="https://coxalah534.pythonanywhere.com/admin">админка</a>
+</div>
+<div>
+    <label>
+        items-ids
+        <input type="text" id="items-ids"/>
+    </label>
+</div>
+<div>
+    <label>
+        discount-id
+        <input type="text" id="discount-id"/>
+    </label>
+</div>
+<div>
+    <label>
+        taxes-ids
+        <input type="text" id="taxes-ids"/>
+    </label>
+</div>
+<div>
+    <button id="link-button">Get a link to form an order</button>
+</div>
+<script type="text/javascript">
+    const link_button = document.getElementById('link-button');
+    link_button.addEventListener('click', function () {
+        const items_ids = document.getElementById('items-ids');
+        const discount_id = document.getElementById('discount-id');
+        const taxes_ids = document.getElementById('taxes-ids');
+
+        try {
+            document.getElementById('a').remove();
+        }
+        catch (e) {
+
+        }
+        let a = document.createElement('a');
+        a.id = 'a'
+        a.href = `https://coxalah534.pythonanywhere.com/create_order/?items_ids=${items_ids.value}&discount_id=${discount_id.value}&taxes_ids=${taxes_ids.value}`;
+        a.text = a.href;
+        document.body.append(a);
+    });
+</script>
+</body>
+</html>

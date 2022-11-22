@@ -9,8 +9,7 @@ CURRENCIES = (
 class Item(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    price = models.FloatField(default=0)
-
+    price = models.IntegerField(default=0)
     currency = models.CharField(
         max_length=3,
         choices=CURRENCIES,
@@ -31,7 +30,7 @@ class Discount(models.Model):
 class Tax(models.Model):
     name = models.CharField(max_length=200)
     percentage = models.FloatField(default=0)
-    stripe_id = models.CharField(max_length=50, default='')
+    stripe_id = models.CharField(max_length=50, default='', blank=True, null=True)
 
 
 class Order(models.Model):

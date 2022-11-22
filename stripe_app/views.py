@@ -1,12 +1,17 @@
 import stripe
 from django.forms import model_to_dict
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from RishatTest.settings import env
 from stripe_app.models import Item, Order, Discount, Tax
 
 stripe.api_key = env('STRIPE_API_KEY')
+REDIRECT_URL = 'https://coxalah534.pythonanywhere.com'
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 def buy_item(request, item_id):
@@ -32,8 +37,8 @@ def buy_item(request, item_id):
                 },
             ],
             mode='payment',
-            success_url='http://localhost:4242/success.html',
-            cancel_url='http://localhost:4242/cancel.html',
+            success_url=REDIRECT_URL,
+            cancel_url=REDIRECT_URL,
         )
         return JsonResponse({'session_id': session.id})
     except stripe.error.InvalidRequestError as e:
@@ -94,7 +99,7 @@ def add_taxes_to_order(order, taxes_ids):
     for tax_id in taxes_ids.split(','):
         tax = Tax.objects.get(id=tax_id)
         order.taxes.add(tax)
-        if tax.stripe_id == '':
+        if tax.stripe_id is None:
             tax_stripe = stripe.TaxRate.create(display_name="Sales Tax", inclusive=False, percentage=tax.percentage)
             tax.stripe_id = tax_stripe.id
             tax.save()
@@ -161,8 +166,8 @@ def buy_order(request, order_id):
             ],
             discounts=[{'coupon': discount.id} for discount in order.discounts.all()],
             mode='payment',
-            success_url='http://localhost:4242/success.html',
-            cancel_url='http://localhost:4242/cancel.html',
+            success_url=REDIRECT_URL,
+            cancel_url=REDIRECT_URL,
         )
         return JsonResponse({'session_id': session.id})
     except stripe.error.InvalidRequestError as e:

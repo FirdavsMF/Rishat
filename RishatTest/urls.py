@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from stripe_app.views import buy_item, item_check, create_order, order_check, buy_order
+from stripe_app.views import index, buy_item, item_check, create_order, order_check, buy_order
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index),
     path('buy/<item_id>', buy_item),
     path('item/<item_id>', item_check),
     path('create_order/', create_order),
